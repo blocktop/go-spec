@@ -7,6 +7,6 @@ type BlockGenerator interface {
 	Unmarshal(proto.Message, map[string]TransactionHandler) Block
 	LogTransaction(txn Transaction)
 	UnlogTransactions(txns []Transaction)
-	ProduceGenesisBlock() (Block)
+	ProduceGenesisBlock() Block
 	GenerateBlock(parentBranch []Block) (newBlock Block)
 }

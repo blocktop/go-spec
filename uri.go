@@ -24,8 +24,8 @@ import (
 // URI is a string that identifies a resource in a blockchain. The canonical form is:
 //  <blockchain type>://<resource type>/<component type>/<version>/<id>
 // For example:
-//  blckit://block/luckyblock/v1/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
-//  blckit://transaction/exchange/v2/fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
+//  blocktop://block/luckyblock/v1/0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+//  blocktop://transaction/exchange/v2/fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
 type URI struct {
 	uri            string
 	blockchainType string

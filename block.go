@@ -18,7 +18,7 @@ package spec
 
 import "github.com/golang/protobuf/proto"
 
-// Block interface specifies getters required for `blckit` to function.
+// Block interface specifies getters required for `blocktop` to function.
 // Custom blocks must implement this interface.
 type Block interface {
 	// returns the type of the block

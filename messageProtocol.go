@@ -24,8 +24,8 @@ import (
 // MessageProtocol is a string that identifies a messaging protocol. The canonical form is:
 //  /<blockchain type>/<resource type>/<component type>/<version>
 // For example:
-//  /blckit/block/luckyblock/v1
-//  /blckit/transaction/exchange/v2
+//  /blocktop/block/luckyblock/v1
+//  /blocktop/transaction/exchange/v2
 type MessageProtocol struct {
 	protocol       string
 	blockchainType string

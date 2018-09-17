@@ -1,12 +1,14 @@
 package spec
 
+import "context"
+
 type Consensus interface {
-	AddBlock(block Block) (added bool)
-	GetBestBranch() []Block
+	Start(context.Context)
+	AddBlock(block Block, local bool) (added bool)
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
-	OnBlockConfirmed(BlockConfirmedHandler)
+	GetConfirmChan() <-chan Block
+	GetCompetitionChan() <-chan []Block
 }
 
 type BlockComparator func([]Block) Block
-type BlockConfirmedHandler func(Block)

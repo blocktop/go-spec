@@ -1,17 +1,17 @@
 package spec
 
+import "context"
+
 type Blockchain interface {
 	GetType() string
 	ProduceGenesisBlock()
 	GetBlockGenerator() BlockGenerator
 	GetConsensus() Consensus
-	Start()
+	Start(context.Context)
 	Stop()
 	IsRunning() bool
-	ReceiveBlock(block Block) 
-	OnBlockGenerated(BlockGeneratedHandler)
-	OnBlockConfirmed(BlockConfirmedHandler)
-	OnLocalBlockConfirmed(BlockConfirmedHandler)
+	GetReceiveChan() chan<- *BroadcastBlock
+	GetBroadcastChan() <-chan *BroadcastBlock
+	GetConfirmChan() <-chan Block
+	GetConfirmLocalChan() <-chan Block
 }
-
-type BlockGeneratedHandler func(Block)

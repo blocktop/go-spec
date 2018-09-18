@@ -24,6 +24,7 @@ type Consensus interface {
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
 	GetConfirmChan() <-chan Block
+	GetConfirmLocalChan() <-chan Block
 	GetCompetitionChan() <-chan []Block
 }
 

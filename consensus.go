@@ -19,13 +19,10 @@ package spec
 import "context"
 
 type Consensus interface {
-	Start(context.Context)
+	Start(ctx context.Context, confirmChan chan<- Block, confirmLocalChan chan<- Block, competeChan chan<- []Block)
 	AddBlock(block Block, local bool) (added bool)
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
-	GetConfirmChan() <-chan Block
-	GetConfirmLocalChan() <-chan Block
-	GetCompetitionChan() <-chan []Block
 }
 
 type BlockComparator func([]Block) Block

@@ -22,9 +22,9 @@ type Blockchain interface {
 	GetType() string
 	GetBlockGenerator() BlockGenerator
 	GetConsensus() Consensus
-	Start(context.Context)
+	Start(ctx context.Context, broadcast chan<- *NetworkMessage)
 	Stop()
 	IsRunning() bool
-	GetReceiveChan() chan<- *BroadcastBlock
-	GetBroadcastChan() <-chan *BroadcastBlock
+	ReceiveBlock(*NetworkMessage)
+	ReceiveTransaction(*NetworkMessage)
 }

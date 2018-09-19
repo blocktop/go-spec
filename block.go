@@ -48,5 +48,5 @@ type Block interface {
 	// converts the block to a protocolbuf
 	Marshal() proto.Message
 
-	Unmarshal(proto.Message, map[string]TransactionHandler)
+	Unmarshal(proto.Message, []Transaction)
 }

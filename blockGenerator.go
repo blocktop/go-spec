@@ -22,6 +22,7 @@ type BlockGenerator interface {
 	GetType() string
 	Unmarshal(proto.Message) Block
 	ReceiveTransaction(*NetworkMessage)
+	TryCommitBlock(newBlock Block, branch []Block) bool
 	CommitBlock(Block)
 	GenerateGenesisBlock() Block
 	GenerateBlock(parentBranch []Block) (newBlock Block)

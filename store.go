@@ -16,12 +16,14 @@
 
 package spec
 
-import "github.com/golang/protobuf/proto"
+import "context"
 
-type Transaction interface {
-	GetType() string
-	GetVersion() string
-	GetID() string
-	Parties() map[string]Account // e.g. ["sender"]Account{x}
-	Marshal() proto.Message
+type Store interface {
+	OpenBlock(blockNumber uint64) error
+	IsOpen() (bool, uint64)
+	Close()
+	SubmitBlock(context.Context, Block) (root string, err error)
+	GetRoot() string
+	Commit(context.Context) error
+	Revert() error
 }

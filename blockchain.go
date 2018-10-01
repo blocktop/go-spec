@@ -19,12 +19,12 @@ package spec
 import "context"
 
 type Blockchain interface {
-	GetType() string
-	GetBlockGenerator() BlockGenerator
-	GetConsensus() Consensus
-	Start(ctx context.Context, broadcast chan<- *NetworkMessage)
+	Type() string
+	BlockGenerator() BlockGenerator
+	Consensus() Consensus
+	Start(ctx context.Context, broadcastFn NetworkBroadcaster)
 	Stop()
 	IsRunning() bool
-	ReceiveBlock(*NetworkMessage)
-	ReceiveTransaction(*NetworkMessage)
+	ReceiveBlock(*NetworkMessage) error 
+	ReceiveTransaction(*NetworkMessage) error
 }

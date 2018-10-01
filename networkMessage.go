@@ -16,10 +16,10 @@
 
 package spec
 
-import "github.com/golang/protobuf/proto"
-
 type NetworkMessage struct {
-	Message  proto.Message
+	Data     []byte
+	Links		 Links
+	Hash	   string
 	Protocol *MessageProtocol
 	From		 string
 }

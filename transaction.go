@@ -16,12 +16,7 @@
 
 package spec
 
-import "github.com/golang/protobuf/proto"
-
 type Transaction interface {
-	GetType() string
-	GetVersion() string
-	GetID() string
+	Marshalled
 	Parties() map[string]Account // e.g. ["sender"]Account{x}
-	Marshal() proto.Message
 }

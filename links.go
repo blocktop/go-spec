@@ -16,16 +16,4 @@
 
 package spec
 
-type Consensus interface {
-	OnBlockConfirmed(BlockConfirmationHandler)
-	OnLocalBlockConfirmed(BlockConfirmationHandler)
-	OnCompete(BranchCompetitionHandler)
-	AddBlock(block Block, local bool) (added bool)
-	WasSeen(block Block) bool
-	SetCompeted(head Block)
-}
-
-type BlockComparator func([]Block) Block
-
-type BlockConfirmationHandler func(Block)
-type BranchCompetitionHandler func([]Block)
+type Links map[string]string // [name]hash

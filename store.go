@@ -19,11 +19,22 @@ package spec
 import "context"
 
 type Store interface {
-	OpenBlock(blockNumber uint64) error
-	IsOpen() (bool, uint64)
+	OpenBlock(blockNumber uint64) (StoreBlock, error)
+	StoreBlock() StoreBlock 
 	Close()
-	SubmitBlock(context.Context, Block) (root string, err error)
+	GetRoot() string
+	Put(context.Context, Marshalled) error
+	Get(ctx context.Context, hash string, obj Marshalled) error
+	TreeGet(ctx context.Context, key string, obj Marshalled) error
+	Hash(data []byte, links Links) (string, error)
+}
+
+type StoreBlock interface {
+	IsOpen() (bool, uint64)
+	Submit(context.Context, Block) (root string, err error)
 	GetRoot() string
 	Commit(context.Context) error
 	Revert() error
+	TreePut(ctx context.Context, key string, obj Marshalled) error
+	TreeGet(ctx context.Context, key string, obj Marshalled) error
 }

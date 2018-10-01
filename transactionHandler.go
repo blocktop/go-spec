@@ -16,10 +16,8 @@
 
 package spec
 
-import "github.com/golang/protobuf/proto"
-
 type TransactionHandler interface {
-	GetType() string
-	Unmarshal(proto.Message) Transaction
+	Type() string
+	ReceiveTransaction(*NetworkMessage) (Transaction, error)
 	Execute(Transaction) (ok bool)
 }

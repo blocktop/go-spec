@@ -22,11 +22,17 @@ import (
 
 type NetworkNode interface {
 	Bootstrap(context.Context) error
-	GetPeerID() string
+	PeerID() string
 	Listen(context.Context)
 	Sign(data []byte) ([]byte, error)
 	Verify(peerID string, data []byte, sig []byte, pubKey []byte) (bool, error)
-	GetReceiveChan() <-chan *NetworkMessage
-	GetBroadcastChan() chan<- *NetworkMessage
+	
+	// Broadcast is a NetworkBroadcaster function that can be passed
+	// around to any component that needs to broadcast to the P2P network.
+	Broadcast(*NetworkMessage)
+	OnMessageReceived(MessageReceivedHandler)
 	Close()
 }
+
+type MessageReceivedHandler func(*NetworkMessage)
+type NetworkBroadcaster func(*NetworkMessage)

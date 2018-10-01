@@ -49,7 +49,7 @@ func NewURIFromProtocol(p *MessageProtocol, id string) *URI {
 	u.SetBlockchainType(p.GetBlockchainType())
 	u.SetResourceType(p.GetResourceType())
 	u.SetComponentType(p.GetComponentType())
-	u.SetVersion(p.GetVersion())
+	u.SetVersion(p.Version())
 	return u
 }
 
@@ -107,14 +107,14 @@ func (u *URI) SetComponentType(componentType string) {
 	u.componentType = strings.ToLower(componentType)
 	u.formatValue()
 }
-func (u *URI) GetVersion() string {
+func (u *URI) Version() string {
 	return u.version
 }
 func (u *URI) SetVersion(version string) {
 	u.version = strings.ToLower(version)
 	u.formatValue()
 }
-func (u *URI) GetID() string {
+func (u *URI) Hash() string {
 	return u.id
 }
 func (u *URI) SetID(id string) {

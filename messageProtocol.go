@@ -35,7 +35,7 @@ type MessageProtocol struct {
 }
 
 const (
-	ResourceTypeBlock string = "block"
+	ResourceTypeBlock       string = "block"
 	ResourceTypeTransaction string = "transaction"
 )
 
@@ -100,7 +100,7 @@ func (p *MessageProtocol) SetComponentType(componentType string) {
 	p.componentType = strings.ToLower(componentType)
 	p.formatValue()
 }
-func (p *MessageProtocol) GetVersion() string {
+func (p *MessageProtocol) Version() string {
 	return p.version
 }
 func (p *MessageProtocol) SetVersion(version string) {

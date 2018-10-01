@@ -16,12 +16,10 @@
 
 package spec
 
-import "github.com/golang/protobuf/proto"
-
 type BlockGenerator interface {
-	GetType() string
-	Unmarshal(proto.Message) Block
-	ReceiveTransaction(*NetworkMessage)
+	Type() string
+	ReceiveBlock(*NetworkMessage) (Block, error)
+	ReceiveTransaction(*NetworkMessage) (Transaction, error)
 	TryCommitBlock(newBlock Block, branch []Block) bool
 	CommitBlock(Block)
 	GenerateGenesisBlock() Block

@@ -19,7 +19,7 @@ package spec
 type Consensus interface {
 	OnBlockConfirmed(BlockConfirmationHandler)
 	OnLocalBlockConfirmed(BlockConfirmationHandler)
-	OnCompete(BranchCompetitionHandler)
+	Competition() Competition
 	AddBlock(block Block, local bool) (added bool)
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
@@ -28,4 +28,3 @@ type Consensus interface {
 type BlockComparator func([]Block) Block
 
 type BlockConfirmationHandler func(Block)
-type BranchCompetitionHandler func([]Block)

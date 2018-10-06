@@ -21,6 +21,7 @@ type Consensus interface {
 	OnLocalBlockConfirmed(BlockConfirmationHandler)
 	Competition() Competition
 	AddBlock(block Block, local bool) (added bool)
+	ConfirmBlocks()
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
 }

@@ -6,5 +6,5 @@ type Competition interface {
 	// Gets the current competition branch up to the block number
 	// specified. If a previous head has been invalidated, then
 	// switchHeads will be true.
-	Branch(headBlockNumber uint64) (branch []Block, switchHeads bool)
+	Branch(headBlockNumber uint64) (branch []Block, rootID int, switchHeads bool)
 }

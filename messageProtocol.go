@@ -28,9 +28,9 @@ import (
 //  /blocktop/transaction/exchange/v2
 type MessageProtocol struct {
 	protocol       string
-	blockchainType string
+	blockchainName string
 	resourceType   string
-	componentType  string
+	componentName  string
 	version        string
 }
 
@@ -47,12 +47,22 @@ func NewProtocol(value string) *MessageProtocol {
 	return p
 }
 
-func NewProtocolParts(blockchainType string, resourceType string, componentType string, version string) *MessageProtocol {
+func NewProtocolParts(blockchainName string, resourceType string, componentName string, version string) *MessageProtocol {
 	p := &MessageProtocol{}
-	p.SetBlockchainType(blockchainType)
+	p.SetBlockchainName(blockchainName)
 	p.SetResourceType(resourceType)
-	p.SetComponentType(componentType)
+	p.SetComponentName(componentName)
 	p.SetVersion(version)
+
+	return p
+}
+
+func NewProtocolMarshalled(blockchainName string, m Marshalled) *MessageProtocol {
+	p := &MessageProtocol{}
+	p.SetBlockchainName(blockchainName)
+	p.SetResourceType(m.ResourceType())
+	p.SetComponentName(FullyQualifiedName(m))
+	p.SetVersion(m.Version())
 
 	return p
 }
@@ -66,9 +76,9 @@ func (p *MessageProtocol) SetValue(value string) (ok bool) {
 	if len(parts) != 5 {
 		return false
 	}
-	p.blockchainType = parts[1]
+	p.blockchainName = parts[1]
 	p.resourceType = parts[2]
-	p.componentType = parts[3]
+	p.componentName = parts[3]
 	p.version = parts[4]
 
 	p.formatValue()
@@ -76,28 +86,28 @@ func (p *MessageProtocol) SetValue(value string) (ok bool) {
 }
 
 func (p *MessageProtocol) formatValue() {
-	p.protocol = fmt.Sprintf("/%s/%s/%s/%s", p.blockchainType, p.resourceType, p.componentType, p.version)
+	p.protocol = fmt.Sprintf("/%s/%s/%s/%s", p.blockchainName, p.resourceType, p.componentName, p.version)
 }
 
-func (p *MessageProtocol) GetBlockchainType() string {
-	return p.blockchainType
+func (p *MessageProtocol) BlockchainName() string {
+	return p.blockchainName
 }
-func (p *MessageProtocol) SetBlockchainType(blockchainType string) {
-	p.blockchainType = strings.ToLower(blockchainType)
+func (p *MessageProtocol) SetBlockchainName(blockchainName string) {
+	p.blockchainName = strings.ToLower(blockchainName)
 	p.formatValue()
 }
-func (p *MessageProtocol) GetResourceType() string {
+func (p *MessageProtocol) ResourceType() string {
 	return p.resourceType
 }
 func (p *MessageProtocol) SetResourceType(resourceType string) {
 	p.resourceType = strings.ToLower(resourceType)
 	p.formatValue()
 }
-func (p *MessageProtocol) GetComponentType() string {
-	return p.componentType
+func (p *MessageProtocol) ComponentName() string {
+	return p.componentName
 }
-func (p *MessageProtocol) SetComponentType(componentType string) {
-	p.componentType = strings.ToLower(componentType)
+func (p *MessageProtocol) SetComponentName(componentName string) {
+	p.componentName = strings.ToLower(componentName)
 	p.formatValue()
 }
 func (p *MessageProtocol) Version() string {

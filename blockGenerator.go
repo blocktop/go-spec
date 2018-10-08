@@ -18,10 +18,10 @@ package spec
 
 type BlockGenerator interface {
 	Type() string
-	ReceiveBlock(*NetworkMessage) (Block, error)
 	ReceiveTransaction(*NetworkMessage) (Transaction, error)
 	TryCommitBlock(newBlock Block, branch []Block) bool
 	CommitBlock(Block)
 	GenerateGenesisBlock() Block
 	GenerateBlock(parentBranch []Block) (newBlock Block)
+	BlockPrototype() Block
 }

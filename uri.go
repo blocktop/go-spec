@@ -28,9 +28,9 @@ import (
 //  blocktop://transaction/exchange/v2/fedcba9876543210fedcba9876543210fedcba9876543210fedcba9876543210
 type URI struct {
 	uri            string
-	blockchainType string
+	blockchainName string
 	resourceType   string
-	componentType  string
+	componentName  string
 	version        string
 	id             string
 }
@@ -46,18 +46,18 @@ func NewURI(value string) *URI {
 func NewURIFromProtocol(p *MessageProtocol, id string) *URI {
 	u := &URI{}
 	u.SetID(id)
-	u.SetBlockchainType(p.GetBlockchainType())
-	u.SetResourceType(p.GetResourceType())
-	u.SetComponentType(p.GetComponentType())
+	u.SetBlockchainName(p.BlockchainName())
+	u.SetResourceType(p.ResourceType())
+	u.SetComponentName(p.ComponentName())
 	u.SetVersion(p.Version())
 	return u
 }
 
-func NewURIParts(blockchainType string, resourceType string, componentType string, version string, id string) *URI {
+func NewURIParts(blockchainName string, resourceType string, componentName string, version string, id string) *URI {
 	u := &URI{}
-	u.SetBlockchainType(blockchainType)
+	u.SetBlockchainName(blockchainName)
 	u.SetResourceType(resourceType)
-	u.SetComponentType(componentType)
+	u.SetComponentName(componentName)
 	u.SetVersion(version)
 	u.SetID(id)
 
@@ -73,9 +73,9 @@ func (u *URI) SetValue(value string) (ok bool) {
 	if len(parts) != 6 {
 		return false
 	}
-	u.blockchainType = parts[0][:len(parts[0])] //omit the colon
+	u.blockchainName = parts[0][:len(parts[0])] //omit the colon
 	u.resourceType = parts[2]
-	u.componentType = parts[3]
+	u.componentName = parts[3]
 	u.version = parts[4]
 	u.id = parts[5]
 	u.formatValue()
@@ -83,28 +83,28 @@ func (u *URI) SetValue(value string) (ok bool) {
 }
 
 func (u *URI) formatValue() {
-	u.uri = fmt.Sprintf("%s://%s/%s/%s/%s", u.blockchainType, u.resourceType, u.componentType, u.version, u.id)
+	u.uri = fmt.Sprintf("%s://%s/%s/%s/%s", u.blockchainName, u.resourceType, u.componentName, u.version, u.id)
 }
 
-func (u *URI) GetBlockchainType() string {
-	return u.blockchainType
+func (u *URI) BlockchainName() string {
+	return u.blockchainName
 }
-func (u *URI) SetBlockchainType(blockchainType string) {
-	u.blockchainType = strings.ToLower(blockchainType)
+func (u *URI) SetBlockchainName(blockchainName string) {
+	u.blockchainName = strings.ToLower(blockchainName)
 	u.formatValue()
 }
-func (u *URI) GetResourceType() string {
+func (u *URI) ResourceType() string {
 	return u.resourceType
 }
 func (u *URI) SetResourceType(resourceType string) {
 	u.resourceType = strings.ToLower(resourceType)
 	u.formatValue()
 }
-func (u *URI) GetComponentType() string {
-	return u.componentType
+func (u *URI) ComponentName() string {
+	return u.componentName
 }
-func (u *URI) SetComponentType(componentType string) {
-	u.componentType = strings.ToLower(componentType)
+func (u *URI) SetComponentName(componentName string) {
+	u.componentName = strings.ToLower(componentName)
 	u.formatValue()
 }
 func (u *URI) Version() string {
@@ -114,7 +114,7 @@ func (u *URI) SetVersion(version string) {
 	u.version = strings.ToLower(version)
 	u.formatValue()
 }
-func (u *URI) Hash() string {
+func (u *URI) ID() string {
 	return u.id
 }
 func (u *URI) SetID(id string) {

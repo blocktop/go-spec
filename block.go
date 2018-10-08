@@ -28,7 +28,7 @@ type Block interface {
 	BlockNumber() uint64
 
 	// validates the block
-	Validate() bool
+	Valid() bool
 
 	// gets the block's transactions
 	Transactions() []Transaction

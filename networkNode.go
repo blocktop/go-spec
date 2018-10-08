@@ -29,10 +29,9 @@ type NetworkNode interface {
 	
 	// Broadcast is a NetworkBroadcaster function that can be passed
 	// around to any component that needs to broadcast to the P2P network.
-	Broadcast(*NetworkMessage)
-	OnMessageReceived(MessageReceivedHandler)
+	Broadcast([]*NetworkMessage)
+	OnMessageReceived(MessageReceiver)
 	Close()
 }
 
-type MessageReceivedHandler func(*NetworkMessage)
-type NetworkBroadcaster func(*NetworkMessage)
+type MessageReceiver func(*NetworkMessage)

@@ -19,8 +19,8 @@ package spec
 type Consensus interface {
 	OnBlockConfirmed(BlockConfirmationHandler)
 	OnLocalBlockConfirmed(BlockConfirmationHandler)
-	Competition() Competition
-	AddBlock(block Block, local bool) (added bool)
+	Evaluate() Competition
+	AddBlocks(block []Block, local bool) (addedBlocks Block, disqualifiedBlocks []Block, err error)
 	ConfirmBlocks()
 	WasSeen(block Block) bool
 	SetCompeted(head Block)

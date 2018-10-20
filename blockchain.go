@@ -26,6 +26,6 @@ type Blockchain interface {
 	IsRunning() bool
 	GenerateBlock(branch []Block, rootID int) Block
 	GenerateGenesis() Block
-	AddBlocks(blocks []Block, local bool) (addedBlock Block, err error)
+	AddBlocks(blocks []Block, local bool) *AddBlocksResponse
 	ReceiveTransaction(*NetworkMessage) error
 }

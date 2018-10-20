@@ -20,12 +20,21 @@ type Consensus interface {
 	OnBlockConfirmed(BlockConfirmationHandler)
 	OnLocalBlockConfirmed(BlockConfirmationHandler)
 	Evaluate() Competition
-	AddBlocks(block []Block, local bool) (addedBlocks Block, disqualifiedBlocks []Block, err error)
+	AddBlocks(block []Block, local bool) *AddBlocksResponse
 	ConfirmBlocks()
 	WasSeen(block Block) bool
 	SetCompeted(head Block)
+	SetConfirmingRoot(rootID int)
 }
 
 type BlockComparator func([]Block) Block
 
 type BlockConfirmationHandler func(Block)
+
+type AddBlocksResponse struct {
+	AddedBlock         Block
+	AddedToRoot        int
+	MaxBlockNumber     uint64
+	DisqualifiedBlocks []Block
+	Error              error
+}
